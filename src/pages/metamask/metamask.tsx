@@ -24,14 +24,14 @@ function MetamaskPage() {
 }
 
 function Wallet() {
-  const { connect, switchChain, chainList, wallet, loading } =
+  const { connect, switchChain, chainList, wallet, loading, isConnected } =
     useMetamaskWallet();
 
   if (loading) {
     return <CircularProgress />;
   }
 
-  if (!wallet.account) {
+  if (!isConnected) {
     return (
       <Box p="1rem">
         <Button onClick={connect} variant="contained">

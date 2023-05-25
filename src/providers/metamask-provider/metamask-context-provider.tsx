@@ -18,6 +18,7 @@ type ContextValue = {
   connect: () => void;
   switchChain: (chainId: number) => void;
   loading: boolean;
+  isConnected: boolean;
   chainList: Chain[];
 };
 
@@ -38,14 +39,20 @@ export default function MetamaskContextProvider({
   const init = async () => {
     const web3 = await getWeb3Instance();
 
-    if (web3) {
-      web3InstanceRef.current = web3;
+    if (!web3) {
+      setInitializaton(false);
+      return;
+    }
 
-      const chainList = await getChainList();
+    web3InstanceRef.current = web3;
 
-      console.log(chainList);
+    const chainList = await getChainList();
+    setChainList(chainList);
 
-      setChainList(chainList);
+    const accounts = await web3InstanceRef.current.eth.getAccounts();
+
+    if (accounts.length) {
+      handleAccountsChanged(accounts);
     }
 
     setInitializaton(false);
@@ -88,6 +95,12 @@ export default function MetamaskContextProvider({
 
   const handleAccountsChanged = useCallback(
     async (accounts: Array<string>) => {
+      if (!accounts.length) {
+        setWallet({} as Wallet);
+
+        return;
+      }
+
       setLoading(true);
 
       const [account] = accounts;
@@ -103,14 +116,6 @@ export default function MetamaskContextProvider({
 
   const connect = useCallback(async () => {
     setLoading(true);
-
-    const accounts = await web3InstanceRef.current.eth.getAccounts();
-
-    if (accounts.length) {
-      handleAccountsChanged(accounts);
-
-      return;
-    }
 
     const requestAccounts = await web3InstanceRef.current.eth.requestAccounts();
 
@@ -209,6 +214,7 @@ export default function MetamaskContextProvider({
         switchChain,
         loading,
         chainList,
+        isConnected: Boolean(wallet.accounts?.length),
       }}
     >
       <>
