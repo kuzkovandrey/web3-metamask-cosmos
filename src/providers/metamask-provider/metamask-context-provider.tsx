@@ -58,22 +58,25 @@ export default function MetamaskContextProvider({
     setInitializaton(false);
   };
 
-  const getKuzCoinBalance = useCallback(async (accountAddress: string) => {
-    const contract = new web3InstanceRef.current.eth.Contract(
-      KUZ_COIN_ABI,
-      KUZ_COIN_CONTRACT_ADDREESS
-    );
+  const getKuzCoinBalance = useCallback(
+    async (accountAddress: string): Promise<string> => {
+      const contract = new web3InstanceRef.current.eth.Contract(
+        KUZ_COIN_ABI,
+        KUZ_COIN_CONTRACT_ADDREESS
+      );
 
-    const request = contract.methods
-      .balanceOf(accountAddress)
-      .call() as Promise<string>;
+      const request = contract.methods
+        .balanceOf(accountAddress)
+        .call() as Promise<string>;
 
-    try {
-      return await request;
-    } catch (e) {
-      return "0";
-    }
-  }, []);
+      try {
+        return await request;
+      } catch (e) {
+        return "0";
+      }
+    },
+    [web3InstanceRef]
+  );
 
   const getAccountBalance = useCallback(
     async (account: string): Promise<Wallet["balance"]> => {

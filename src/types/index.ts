@@ -1,3 +1,4 @@
+// Metamask types
 export interface Chain {
   name: string;
   chain: string;
@@ -37,3 +38,14 @@ export interface MetamaskError {
 export const isMetamaskError = (error: any): error is MetamaskError => {
   return Boolean(error?.code) && Boolean(error?.message);
 };
+
+// Cosmos types
+export interface CosmosBalance {
+  denom: string;
+  amount: string;
+}
+
+export interface CosmosWallet {
+  address: string;
+  balance: CosmosBalance[];
+}
