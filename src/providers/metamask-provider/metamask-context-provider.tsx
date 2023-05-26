@@ -11,7 +11,7 @@ import Web3 from "web3";
 import { getChainList } from "@/src/api";
 import { Alert, Snackbar } from "@mui/material";
 import { Chain, Wallet, isMetamaskError } from "@/src/types";
-import { KUZ_COIN_ABI, KUZ_COIN_CONTRACT_ADDREESS } from "@/src/values";
+import { KUZ_COIN_ABI, KUZ_COIN_CONTRACT_ADDRESS } from "@/src/values";
 
 type ContextValue = {
   wallet: Wallet;
@@ -62,7 +62,7 @@ export default function MetamaskContextProvider({
     async (accountAddress: string): Promise<string> => {
       const contract = new web3InstanceRef.current.eth.Contract(
         KUZ_COIN_ABI,
-        KUZ_COIN_CONTRACT_ADDREESS
+        KUZ_COIN_CONTRACT_ADDRESS
       );
 
       const request = contract.methods

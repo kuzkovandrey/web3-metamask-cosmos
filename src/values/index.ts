@@ -6,7 +6,7 @@ export const INFURA_API_KEY =
 export const CHAIN_LIST_API_URL =
   "https://chainid.network/chains.json?testnets=true";
 
-export const KUZ_COIN_CONTRACT_ADDREESS =
+export const KUZ_COIN_CONTRACT_ADDRESS =
   "0x859564b12B34B198ea6988D470F6A426CBa11711";
 
 export const KUZ_COIN_ABI: AbiItem[] = [
