@@ -1,7 +1,6 @@
 // Metamask types
 export interface Chain {
   name: string;
-  chain: string;
   rpc: string[];
   nativeCurrency: {
     name: string;
@@ -9,7 +8,6 @@ export interface Chain {
     decimals: number;
   };
   chainId: number;
-  networkId: number;
 }
 
 export interface AddEthereumChainParameter {

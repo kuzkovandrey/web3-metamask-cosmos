@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  CircularProgress,
   FormControl,
   InputLabel,
   MenuItem,
@@ -9,15 +8,11 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { useMetamaskWallet } from "@/src/providers/metamask-provider";
+import { useWallet } from "../providers/metamask";
+import { CHAIN_LIST } from "../values";
 
 function MetamaskWallet() {
-  const { connect, switchChain, chainList, wallet, loading, isConnected } =
-    useMetamaskWallet();
-
-  if (loading) {
-    return <CircularProgress />;
-  }
+  const { connect, switchChain, wallet, isConnected } = useWallet();
 
   if (!isConnected) {
     return (
@@ -63,7 +58,7 @@ function MetamaskWallet() {
             switchChain(+value.target.value);
           }}
         >
-          {chainList.map((chain) => (
+          {CHAIN_LIST.map((chain) => (
             <MenuItem key={chain.chainId} value={chain.chainId}>
               {chain.name}
             </MenuItem>

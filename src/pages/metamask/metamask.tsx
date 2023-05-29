@@ -1,14 +1,22 @@
 import { Container } from "@mui/material";
-import { MetamaskContextProvider } from "@/src/providers/metamask-provider";
 import { MetamaskWallet } from "@/src/components";
+import {
+  WalletProvider,
+  Web3MetamaskProvider,
+  NotificationsProvider,
+} from "@/src/providers/metamask";
 
 function MetamaskPage() {
   return (
-    <MetamaskContextProvider>
-      <Container maxWidth="md">
-        <MetamaskWallet />
-      </Container>
-    </MetamaskContextProvider>
+    <NotificationsProvider>
+      <Web3MetamaskProvider>
+        <WalletProvider>
+          <Container maxWidth="md">
+            <MetamaskWallet />
+          </Container>
+        </WalletProvider>
+      </Web3MetamaskProvider>
+    </NotificationsProvider>
   );
 }
 

@@ -1,10 +1,66 @@
 import { AbiItem } from "web3-utils";
+import { Chain } from "../types";
 
 export const INFURA_API_KEY =
   process.env.INFURA_API_KEY || process.env.NEXT_PUBLIC_INFURA_API_KEY || "";
 
 export const CHAIN_LIST_API_URL =
   "https://chainid.network/chains.json?testnets=true";
+
+export const CHAIN_LIST: Chain[] = [
+  {
+    name: "Ethereum Mainnet",
+    rpc: [
+      "https://mainnet.infura.io/v3/${INFURA_API_KEY}",
+      "wss://mainnet.infura.io/ws/v3/${INFURA_API_KEY}",
+      "https://api.mycryptoapi.com/eth",
+      "https://cloudflare-eth.com",
+      "https://ethereum.publicnode.com",
+    ],
+    nativeCurrency: {
+      name: "Ether",
+      symbol: "ETH",
+      decimals: 18,
+    },
+    chainId: 1,
+  },
+  {
+    name: "Expanse Network",
+    rpc: ["https://node.expanse.tech"],
+    nativeCurrency: {
+      name: "Expanse Network Ether",
+      symbol: "EXP",
+      decimals: 18,
+    },
+    chainId: 2,
+  },
+  {
+    name: "Ropsten",
+    rpc: [
+      "https://ropsten.infura.io/v3/${INFURA_API_KEY}",
+      "wss://ropsten.infura.io/ws/v3/${INFURA_API_KEY}",
+    ],
+    nativeCurrency: {
+      name: "Ropsten Ether",
+      symbol: "ETH",
+      decimals: 18,
+    },
+    chainId: 3,
+  },
+  {
+    name: "Rinkeby",
+    rpc: [
+      "https://rinkeby.infura.io/v3/${INFURA_API_KEY}",
+      "wss://rinkeby.infura.io/ws/v3/${INFURA_API_KEY}",
+    ],
+    nativeCurrency: {
+      name: "Rinkeby Ether",
+      symbol: "ETH",
+      decimals: 18,
+    },
+    chainId: 4,
+  },
+];
 
 export const KUZ_COIN_CONTRACT_ADDRESS =
   "0x859564b12B34B198ea6988D470F6A426CBa11711";
